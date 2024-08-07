@@ -9,11 +9,10 @@ import { Dialog, DialogContent, DialogTrigger } from './ui/dialog';
 
 interface UploadPhotoFormProps {
   onPhotoUploaded: (photo: Photo) => void;
-  universityId: string | string[];
-  year: string | string[];
+  classId:string | string[]
 }
 
-const UploadPhotoForm: React.FC<UploadPhotoFormProps> = ({ onPhotoUploaded, universityId, year }) => {
+const UploadPhotoForm: React.FC<UploadPhotoFormProps> = ({ onPhotoUploaded, classId }) => {
   const [file, setFile] = useState<File | null>(null);
   const [caption, setCaption] = useState<string>('');
   const { startUpload, isUploading } = useUploadThing('freePlanUploader');
@@ -31,12 +30,12 @@ const UploadPhotoForm: React.FC<UploadPhotoFormProps> = ({ onPhotoUploaded, univ
       const photo = { id: responseFile.customId, url: responseFile.url, caption };
 
       // Save photo to the database
-      await fetch('/api/photos', {
+      await fetch('/api/photo', {
         method: 'POST',
         body: JSON.stringify({
           url: responseFile.url,
           caption,
-          classId: `${universityId}-${year}`
+          classId: classId
         }),
         headers: {
           'Content-Type': 'application/json'
@@ -75,7 +74,7 @@ const UploadPhotoForm: React.FC<UploadPhotoFormProps> = ({ onPhotoUploaded, univ
   );
 };
 
-const UploadButton: React.FC<UploadPhotoFormProps> = ({ onPhotoUploaded, universityId, year }) => {
+const UploadButton: React.FC<UploadPhotoFormProps> = ({ onPhotoUploaded, classId }) => {
     const [isOpen, setIsOpen] = useState<boolean>(false)
     return (
         <>
@@ -90,9 +89,8 @@ const UploadButton: React.FC<UploadPhotoFormProps> = ({ onPhotoUploaded, univers
 
          <DialogContent>
             <UploadPhotoForm 
-            onPhotoUploaded={onPhotoUploaded}
-            year={year}
-             universityId={universityId}
+             onPhotoUploaded={onPhotoUploaded}
+             classId={classId}
             />
         </DialogContent>
 

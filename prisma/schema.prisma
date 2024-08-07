@@ -18,7 +18,7 @@ model University {
 
 model Class {
   id            String    @id @default(cuid())
-  year          Int
+  year          String
   universityId  String
   university    University  @relation(fields: [universityId], references: [id])
   photos        Photo[]

@@ -3,17 +3,15 @@ import { db } from "@/db";
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
   const universityId = searchParams.get('universityId');
-  const year = parseInt(searchParams.get('year') || '', 10);
-
-  if (!universityId || isNaN(year)) {
+ 
+  if (!universityId) {
     return new Response(JSON.stringify({ message: 'universityId and year are required.' }), { status: 400 });
   }
 
   try {
-    const classEntry = await db.class.findFirst({
+    const classEntry = await db.class.findMany({
       where: {
         universityId,
-        year,
       },
     });
 
@@ -30,18 +28,6 @@ export async function POST(req: Request) {
 
     if (!universityId || !year) {
       return new Response(JSON.stringify({ message: 'universityId and year are required.' }), { status: 400 });
-    }
-
-    // Check if class already exists
-    const existingClass = await db.class.findFirst({
-        where: {
-          universityId,
-          year,
-        },
-    });
-
-    if (existingClass) {
-     return new Response(JSON.stringify(existingClass), { status: 200 });
     }
 
     const newClass = await db.class.create({

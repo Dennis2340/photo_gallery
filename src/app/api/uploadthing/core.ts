@@ -16,13 +16,7 @@ const onUploadComplete = async ({ metadata, file }: {
 }) => {
   
   try {
-    const createdFile = await db.photo.create({
-        data: {
-          url: '',
-          caption: '',
-          classId: '',
-        },
-      });
+    
   
   } catch (error:any) {
     console.error("Error:", error.message);

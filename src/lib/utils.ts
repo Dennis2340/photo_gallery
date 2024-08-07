@@ -36,9 +36,17 @@ export async function fetchClassByYearAndUniversity(universityId: string, year: 
   }
   return null;
 }
+export async function fetchClasses(universityId: string) {
+  const res = await fetch(`/api/class?universityId=${universityId}`);
+  if (res.ok) {
+    return await res.json();
+  }
+  return null;
+}
 
 // Create a new class entry
-export async function createClass(universityId: string, year: number) {
+export async function createClass(universityId: string, year: string) {
+  console.log(universityId, year)
   const res = await fetch('/api/class', {
     method: 'POST',
     headers: {
