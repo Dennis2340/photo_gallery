@@ -72,8 +72,8 @@ export const GalleryPage: React.FC<Props> = ({ initialPhotos }) => {
               <img
                 src={photo.url}
                 alt={photo.caption || 'Photo'}
-                width={300}
-                
+                width={500}
+                height={'auto'}
                 className="w-full h-auto rounded-lg shadow-lg"
               />
               {photo.caption && (

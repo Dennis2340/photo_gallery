@@ -93,7 +93,7 @@ export default function UniversitySelectionPage() {
       setShowNewUniversityInput(false);
     } catch (error) {
       console.error(error);
-      // Handle error (e.g., show a message to the user)
+     
     }
   };
 
