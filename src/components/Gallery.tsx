@@ -5,7 +5,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import UploadButton from './UploadPhotoForm';
 import Skeleton from 'react-loading-skeleton'
 import { Loader2 } from 'lucide-react';
-
+import { Suspense } from 'react'
 export interface Photo {
   id: string | null;
   url: string;
@@ -49,6 +49,7 @@ export const GalleryPage: React.FC<Props> = ({ initialPhotos }) => {
   };
 
   return (
+    <Suspense>
     <div className="min-h-screen flex flex-col items-center justify-center py-1">
       <h1 className="text-4xl font-bold mb-8">Gallery</h1>
       <div className='ml-auto mb-4'>
@@ -87,5 +88,6 @@ export const GalleryPage: React.FC<Props> = ({ initialPhotos }) => {
 
       </div>
     </div>
+    </Suspense>
   );
 };

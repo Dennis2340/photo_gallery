@@ -1,7 +1,7 @@
 import { GalleryPage } from '@/components/Gallery';
 import MaxWidthWrapper from '@/components/MaxWidthWrapper';
 import React from 'react'
-
+import { Suspense } from 'react'
 interface Photo {
     id: string;
     url: string;
@@ -15,9 +15,11 @@ interface Photo {
 const Page = () => {
 
   return (
+    <Suspense>
     <MaxWidthWrapper>
       <GalleryPage initialPhotos={[]} />
     </MaxWidthWrapper>
+    </Suspense>
   );
 }
 
